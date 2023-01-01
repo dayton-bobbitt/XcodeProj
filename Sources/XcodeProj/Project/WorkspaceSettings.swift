@@ -144,12 +144,13 @@ public class WorkspaceSettings: Codable, Equatable, Writable {
     /// - Parameter override: True if the content should be overriden if it already exists.
     /// - Throws: writing error if something goes wrong.
     public func write(path: Path, override: Bool) throws {
+        let dataPath = path + "WorkspaceSettings.xcsettings"
         let encoder = PropertyListEncoder()
         encoder.outputFormat = .xml
         let data = try encoder.encode(self)
-        if override, path.exists {
-            try path.delete()
+        if override, dataPath.exists {
+            try dataPath.delete()
         }
-        try path.write(data)
+        try dataPath.write(data)
     }
 }

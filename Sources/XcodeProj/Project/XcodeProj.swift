@@ -266,4 +266,22 @@ extension XcodeProj: Writable {
         try debuggerPath.mkpath()
         try breakpoints?.write(path: XcodeProj.breakPointsPath(path), override: override)
     }
+    
+    /// Writes workspace settings to the given path.
+    ///
+    /// - Parameter workspaceSettings: represents the WorksapceSettings.xcsettings file
+    /// - Parameter path: parent folder of debugger folder (xcshareddata or xcuserdata)
+    /// - Parameter override: if workspace settings should be overridden. Default is true.
+    ///   If false will throw error if workspace settings already exists at the given path.
+    public static func writeWorkspaceSettings(workspaceSettings: WorkspaceSettings?, path: Path, override: Bool = true) throws {
+        // Create path to xcshareddata if it doesn't already exist. `WorkspaceSettings.write` already
+        // handles the deletion of any existing settings when `override` is `true`. We don't want to
+        // delete the xcshareddata folder when `override` is `true` because that will delete schemes
+        // and breakpoints.
+        if !path.exists {
+            try path.mkpath()
+        }
+
+        try workspaceSettings?.write(path: path, override: override)
+    }
 }

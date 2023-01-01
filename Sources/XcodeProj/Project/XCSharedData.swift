@@ -58,8 +58,14 @@ public final class XCSharedData: Equatable, Writable {
 
     // MARK: - Writable
 
+    /// Writes shared data to the given path.
+    ///
+    /// - Parameter path: parent folder of debugger folder (xcshareddata or xcuserdata)
+    /// - Parameter override: if shared data should be overridden. Default is true.
+    ///   If false, will throw error if shared data already exists at the given path.
     public func write(path: Path, override: Bool) throws {
         try XcodeProj.writeSchemes(schemes: schemes, path: path, override: override)
         try XcodeProj.writeBreakPoints(breakpoints: breakpoints, path: path, override: override)
+        try XcodeProj.writeWorkspaceSettings(workspaceSettings: workspaceSettings, path: path, override: override)
     }
 }

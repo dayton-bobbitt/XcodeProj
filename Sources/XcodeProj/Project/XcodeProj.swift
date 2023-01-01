@@ -95,8 +95,8 @@ extension XcodeProj: Writable {
     ///
     /// - Parameter path: path to `.xcodeproj` file.
     /// - Parameter override: if project should be overridden. Default is true.
-    /// - Parameter outputSettings: Controls the writing of various files.
     ///   If false will throw error if project already exists at the given path.
+    /// - Parameter outputSettings: Controls the writing of various files.
     public func write(path: Path, override: Bool = true, outputSettings: PBXOutputSettings) throws {
         try path.mkpath()
         try writeWorkspace(path: path, override: override)
@@ -134,8 +134,8 @@ extension XcodeProj: Writable {
     ///
     /// - Parameter path: path to `.xcodeproj` file.
     /// - Parameter override: if project should be overridden. Default is true.
+    ///   If false, will throw error if project already exists at the given path.
     /// - Parameter outputSettings: Controls the writing of various files.
-    ///   If false will throw error if project already exists at the given path.
     public func writePBXProj(path: Path, override: Bool = true, outputSettings: PBXOutputSettings) throws {
         try pbxproj.write(path: XcodeProj.pbxprojPath(path), override: override, outputSettings: outputSettings)
     }
@@ -152,8 +152,7 @@ extension XcodeProj: Writable {
     ///
     /// - Parameter path: path to `.xcodeproj` file.
     /// - Parameter override: if shared data should be overridden. Default is true.
-    /// - Parameter outputSettings: Controls the writing of various files.
-    ///   If false will throw error if shared data already exists at the given path.
+    ///   If false, will throw error if shared data already exists at the given path.
     public func writeSharedData(path: Path, override: Bool = true) throws {
         try sharedData?.write(path: XcodeProj.sharedDataPath(path), override: override)
     }

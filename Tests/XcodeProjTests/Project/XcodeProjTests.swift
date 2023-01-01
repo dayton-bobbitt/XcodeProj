@@ -34,7 +34,7 @@ final class XcodeProjIntegrationTests: XCTestCase {
         XCTAssertNotNil(project.sharedData)
         XCTAssertEqual(project.sharedData?.schemes.count, 1)
         XCTAssertNotNil(project.sharedData?.breakpoints)
-        XCTAssertNil(project.sharedData?.workspaceSettings)
+        XCTAssertNotNil(project.sharedData?.workspaceSettings)
 
         // User Data
         XCTAssertEqual(project.userData.count, 2)
